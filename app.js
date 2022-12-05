@@ -1,8 +1,9 @@
 const express = require("express")
 const redis = require("redis")
-const handlebrs = require("express-handlebars")
-
+const {engine} = require("express-handlebars")
 require("dotenv").config()
+
+const {searchUser,addUser,showUser} = require("./controllers/users")
 
 const app = express()
 
@@ -10,7 +11,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended:true }))
 
-app.set("engine",handlebrs({defaultLayout:"main"}))
+app.engine("handlebars",engine())
 app.set("view engine","handlebars")
 
 //routes
